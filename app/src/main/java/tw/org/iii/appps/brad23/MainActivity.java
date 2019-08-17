@@ -1,5 +1,6 @@
 package tw.org.iii.appps.brad23;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -8,6 +9,7 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -55,7 +57,16 @@ public class MainActivity extends AppCompatActivity {
 
     private void gotoScan(){
         Intent intent = new Intent(this, ScanActivity.class);
-        startActivity(intent);
+        //startActivity(intent);
+        startActivityForResult(intent, 123);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            String code = data.getStringExtra("code");
+            Log.v("brad", "result => " + code);
+        }
+    }
 }
