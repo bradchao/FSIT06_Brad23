@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
         if (resultCode == RESULT_OK){
             String code = data.getStringExtra("code");
             Log.v("brad", "result => " + code);
+            webView.loadUrl("javascript:showCode('" + code + "')");
         }
     }
 }
